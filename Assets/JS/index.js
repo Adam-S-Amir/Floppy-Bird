@@ -11,27 +11,27 @@ window.requestAnimFrame = (function () {
 })();
 
 //sounds
-var soundJump = new Audio("./assets/audio/wing.ogg");
-var soundScore = new Audio("./assets/audio/point.ogg");
-var soundHit = new Audio("./assets/audio/hit.ogg");
-var soundDie = new Audio("./assets/audio/die.ogg");
-var soundSwoosh = new Audio("./assets/audio/swooshing.ogg");
+var soundJump = new Audio("./Assets/Audio/wing.ogg");
+var soundScore = new Audio("./Assets/Audio/point.ogg");
+var soundHit = new Audio("./Assets/Audio/hit.ogg");
+var soundDie = new Audio("./Assets/Audio/die.ogg");
+var soundSwoosh = new Audio("./Assets/Audio/swooshing.ogg");
 var channel_max = 10;
-audiochannels = new Array();
+Audiochannels = new Array();
 for (a = 0; a < channel_max; a++) {
-    audiochannels[a] = new Array();
-    audiochannels[a]['channel'] = new Audio();
-    audiochannels[a]['finished'] = -1;
+    Audiochannels[a] = new Array();
+    Audiochannels[a]['channel'] = new Audio();
+    Audiochannels[a]['finished'] = -1;
 }
 
 function play_sound(s) {
-    for (a = 0; a < audiochannels.length; a++) {
+    for (a = 0; a < Audiochannels.length; a++) {
         thistime = new Date();
-        if (audiochannels[a]['finished'] < thistime.getTime()) { // is this channel finished?
-            audiochannels[a]['finished'] = thistime.getTime() + s.duration * 1000;
-            audiochannels[a]['channel'].src = s.src;
-            audiochannels[a]['channel'].load();
-            audiochannels[a]['channel'].play();
+        if (Audiochannels[a]['finished'] < thistime.getTime()) { // is this channel finished?
+            Audiochannels[a]['finished'] = thistime.getTime() + s.duration * 1000;
+            Audiochannels[a]['channel'].src = s.src;
+            Audiochannels[a]['channel'].load();
+            Audiochannels[a]['channel'].play();
             break;
         }
     }
@@ -381,7 +381,7 @@ FB.Pipe = function (x, w) {
 
 FB.Bird = function () {
     this.img = new Image();
-    this.img.src = './assets/img/bird.png';
+    this.img.src = './Assets/img/bird.png';
     this.gravity = 0.12;
     this.width = 34;
     this.height = 24;
@@ -508,7 +508,7 @@ FB.Collides = function (bird, pipe) {
 
 window.Splash = function () {
     this.banner = new Image();
-    this.banner.src = "./assets/img/splash.png";
+    this.banner.src = "./Assets/img/splash.png";
     this.init = function () {
         play_sound(soundSwoosh);
         FB.distance = 0;
@@ -552,7 +552,7 @@ window.Play = function () {
         FB.entities.push(FB.bird);
         for (var n = 0; n < 10; n++) {
             var img = new Image();
-            img.src = "./assets/img/font_small_" + n + '.png';
+            img.src = "./Assets/img/font_small_" + n + '.png';
             FB.fonts.push(img);
         }
         FB.digits = ["0"];
@@ -646,12 +646,12 @@ window.GameOver = function () {
         setTimeout(function () {
             play_sound(soundDie);
             that.banner = new Image();
-            that.banner.src = "./assets/img/scoreboard.png";
+            that.banner.src = "./Assets/img/scoreboard.png";
             var m = that.getMedal();
             that.medal = new Image();
-            that.medal.src = './assets/img/medal_' + m + '.png';
+            that.medal.src = './Assets/img/medal_' + m + '.png';
             that.replay = new Image();
-            that.replay.src = "./assets/img/replay.png";
+            that.replay.src = "./Assets/img/replay.png";
             that.highscore = that.getHighScore();
         }, 500);
     }

@@ -198,6 +198,20 @@ FB.Draw = {
         FB.ctx.fill();
     },
 
+    star: function (x, y, r, col) {
+        r += 2;
+        FB.ctx.fillStyle = col;
+        FB.ctx.beginPath();
+        for (let i = 0; i < 5; i++) {
+            FB.ctx.lineTo(Math.cos((18 + i * 72) / 180 * Math.PI) * r + x,
+                -Math.sin((18 + i * 72) / 180 * Math.PI) * r + y);
+            FB.ctx.lineTo(Math.cos((54 + i * 72) / 180 * Math.PI) * r / 2 + x,
+                -Math.sin((54 + i * 72) / 180 * Math.PI) * r / 2 + y);
+        }
+        FB.ctx.closePath();
+        FB.ctx.fill();
+    },
+
     Image: function (img, x, y) {
         FB.ctx.drawImage(img, x, y);
     },
@@ -343,12 +357,13 @@ FB.Pipe = function (x, w) {
         }
     };
 
+
     this.render = function () {
         if (this.coin) {
-            FB.Draw.circle(this.centerX + this.w / 2 - 5, this.centerY - 5, 5, "Gold")
+            FB.Draw.star(this.centerX + this.w / 1.6 - 8, this.centerY - 5, 5, "Gold");
         }
-        FB.Draw.rect(this.centerX, 0, this.w, this.centerY - 50, '#8ED6FF');
-        FB.Draw.rect(this.centerX, this.centerY + 50, this.w, this.h - this.centerY, '#8ED6FF');
+        FB.Draw.rect(this.centerX, 0, this.w, this.centerY - 50, '#00a848');
+        FB.Draw.rect(this.centerX, this.centerY + 50, this.w, this.h - this.centerY, '#00a848');
     }
 
     this.respawn = function () {
